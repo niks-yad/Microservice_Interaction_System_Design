@@ -1,5 +1,5 @@
 # System Design Project
-![System Design Overview](System Diagram.png)
+![Microservice_Interaction_System_Design](System Diagram.png)
 
 ## Description
 This project is a video-to-audio conversion service designed as a set of microservices.
