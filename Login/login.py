@@ -1,10 +1,37 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+from flask_jwt_extended import JWTManager, create_access_token
+from flaskext.mysql import MySQL
 
 app = Flask(__name__)
+app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
+app.config['MYSQL_DATABASE_USER'] = 'user'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
+app.config['MYSQL_DATABASE_DB'] = 'user_db'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+mysql = MySQL()
+mysql.init_app(app)
+jwt = JWTManager(app)
 
-@app.route('/')
-def home():
-    return 'Login Service on port 5001: Welcome to the Video to Audio Converter App!'
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+    cursor = mysql.connect().cursor()
+    cursor.execute("SELECT * from users where username=%s and password=%s", (username, password))
+    data = cursor.fetchone()
+    if data is None:
+        return jsonify({"msg": "Bad username or password"}), 401
+    access_token = create_access_token(identity=username)
+    return jsonify(access_token=access_token)
+
+@app.route('/register', methods=['POST'])
+def register():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    cursor = mysql.connect().cursor()
+    cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password))
+    mysql.connect().commit()
+    return jsonify({"msg": "User created successfully"}), 201
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)  # Use a unique port for each service
+    app.run(debug=True, port=5001)
