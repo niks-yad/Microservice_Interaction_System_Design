@@ -3,7 +3,7 @@ from flask_jwt_extended import JWTManager, create_access_token
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
-app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this!
+app.config['JWT_SECRET_KEY'] = 'super-secret'  # Change this to actual value
 app.config['MYSQL_DATABASE_USER'] = 'user'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
 app.config['MYSQL_DATABASE_DB'] = 'user_db'
