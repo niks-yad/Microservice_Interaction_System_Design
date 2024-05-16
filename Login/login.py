@@ -4,8 +4,8 @@ from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'super-secret-value'  # Change this to an actual value
-app.config['MYSQL_DATABASE_USER'] = 'user'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
+app.config['MYSQL_DATABASE_USER'] = 'user' # is this gonna be a variable?
+app.config['MYSQL_DATABASE_PASSWORD'] = 'password' 
 app.config['MYSQL_DATABASE_DB'] = 'user_db'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql = MySQL()
