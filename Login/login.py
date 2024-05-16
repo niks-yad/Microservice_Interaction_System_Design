@@ -20,7 +20,7 @@ def login():
     cursor.execute("SELECT * from users where username=%s and password=%s", (username, password))
     data = cursor.fetchone()
     if data is None:
-        return jsonify({"msg": "Bad username or password"}), 401
+        return jsonify({"msg": "Bad username or password"}), 401 # as in error 401
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token)
 
