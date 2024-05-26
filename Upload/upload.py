@@ -4,7 +4,6 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-# Directory where uploaded files will be 
 UPLOAD_FOLDER = '/path/to/the/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
