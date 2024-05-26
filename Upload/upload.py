@@ -20,7 +20,6 @@ def upload_file():
     if 'file' not in request.files:
         return jsonify(message="No file part"), 400
     file = request.files['file']
-    # If the user does not select a file, the browser submits an empty part without filename
     if file.filename == '':
         return jsonify(message="No selected file"), 400
     if file and allowed_file(file.filename):
