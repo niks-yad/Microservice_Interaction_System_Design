@@ -8,7 +8,6 @@ app = Flask(__name__)
 UPLOAD_FOLDER = '/path/to/the/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Allowed file extensions
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'mkv'}
 
 def allowed_file(filename):
